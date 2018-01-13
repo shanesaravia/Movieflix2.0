@@ -1,0 +1,74 @@
+.navbar-brand {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 175%;
+	padding: 0;
+}
+
+img.poster {
+	width: 300px;
+	height: 450px;
+	border: orange solid 2px;
+}
+
+/* Testing Synopsis On Hover */
+.flex-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-content: center;
+	width: 1700px;
+	margin: 0 auto;
+
+}
+
+.caption {
+	width: 300px;
+}
+
+.movie-box {
+	height: 450px;
+	margin: 0 1% 1% 1%;
+}
+
+
+
+
+
+
+
+
+
+
+/*.thumbnail {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    color: white;
+    overflow: hidden;
+}
+
+.thumbnail:hover .caption {
+	visibility: visible;
+}
+
+.thumbnail:hover img {
+   -webkit-filter: brightness(50%);
+    filter:brightness(50%);
+}
+
+.poster-wrap {
+	width: 300px;
+	height: 450px;
+}
+
+body {
+	background-color: grey;
+}*/

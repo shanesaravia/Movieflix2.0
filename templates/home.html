@@ -1,0 +1,66 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movieflix</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+      <a class="navbar-brand mx-md-auto" href="#">MovieFlix</a>
+    </nav>
+
+    {% block content %}
+      <div class="flex-container">
+        {% for key,value in moviedata.iterrows %}
+          <div class="movie-box">
+            <a href="{{ value.mainTrailer }}">
+              <img class="poster" src="{{ value.poster }}">
+              <div class="caption">
+                <p>{{ value.synopsis }}</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endblock %}
+
+
+<!--       <div class="container-fluid">
+        <div class="row">
+          {% for key,value in moviedata.iterrows %}
+            <div class="thumbnail text-center col pb-3">
+              <a href="{{ value.mainTrailer }}">
+                <img class="poster" src="{{ value.poster }}">
+                <div class="caption">
+                  <p>{{ value.synopsis }}</p>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div> -->
+
+<!--           <div class="movieblock">
+            <div class="imagewrapper">
+              <img class="poster" src="{{ value.poster }}" a href="{{ value.mainTrailer }}">
+              <a href="{{ value.mainTrailer }}">
+                <span class="synopsis">{{ value.synopsis }}</span>
+                <div class="favbtn">
+                  <a class="favorite" href="#" onclick="test( '{{ value.title }}' )">Add To Favorites</a>
+                </div>
+              </a>
+            </div>
+            <div class="moviedata">
+              <span class="movietitle">{{ value.title }}</span>
+              <br><span class="datahead actors">Actors:</span> {{ value.actors }}
+              <br><span class="datahead popcornscore">Popcorn Score:</span> {{ value.popcornScore }}, <span class="datahead tomatoscore">Tomato Score:</span> {{ value.tomatoScore }}
+              <br><span class="datahead releasedate">Release Date:</span> {{ value.theaterReleaseDate }}
+              <br><span class="datahead runtime">Runtime:</span> {{ value.runtime }} <span class="datahead rating">Rating:</span> {{ value.mpaaRating }}
+            </div>
+          </div> -->
+
+  </body>
+</html>
