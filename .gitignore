@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Custom Ignores
+config.yml
+configs.yml
+
 # Distribution / packaging
 .Python
 env/
