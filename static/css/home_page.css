@@ -7,7 +7,6 @@
 img.poster {
 	width: 300px;
 	height: 450px;
-	border: orange solid 2px;
 }
 
 /* Testing Synopsis On Hover */
@@ -16,59 +15,76 @@ img.poster {
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-content: center;
-	width: 1700px;
+	width: 1670px;
 	margin: 0 auto;
 
 }
 
-.caption {
-	width: 300px;
-}
-
 .movie-box {
-	height: 450px;
-	margin: 0 1% 1% 1%;
-}
-
-
-
-
-
-
-
-
-
-
-/*.thumbnail {
-    position: relative;
-    padding: 0;
-    margin: 0;
+	position: relative;
+	margin: 0 3.5% 1% 3.5%;
 }
 
 .caption {
-    position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    width: 100%;
-    color: white;
-    overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 280px;
+	margin: 10px;
+	visibility: hidden;
+	overflow: hidden;
 }
 
-.thumbnail:hover .caption {
+.text {
+	color: white;
+	text-align: center;
+}
+
+.poster-wrapper:hover .caption {
+	transition: .5s ease;
 	visibility: visible;
 }
 
-.thumbnail:hover img {
-   -webkit-filter: brightness(50%);
-    filter:brightness(50%);
+.poster-wrapper:hover img.poster{
+	-webkit-filter: brightness(25%);
+	filter:brightness(25%);
 }
 
-.poster-wrap {
-	width: 300px;
-	height: 450px;
+.movie-data {
+	max-width: 300px;
+	padding: 10px;
 }
 
-body {
-	background-color: grey;
-}*/
+span.data-head {
+	font-weight: bold !important;
+}
+
+.back-to-top:hover a{
+	text-decoration: none;
+}
+
+/* Responsive Layout */
+/* 4 columns */
+@media only screen and (max-width: 1640px) {
+	.flex-container {
+		width: 1305px;
+	}
+}
+/* 3 columns */
+@media only screen and (max-width: 1305px) {
+	.flex-container {
+		width: 970px;
+	}
+}
+/* 2 columns */
+@media only screen and (max-width: 970px) {
+	.flex-container {
+		width: 635px;
+	}
+}
+/* 1 column */
+@media only screen and (max-width: 635px) {
+	.flex-container {
+		width: 300px;
+	}
+}
