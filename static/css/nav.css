@@ -41,6 +41,12 @@ a, a:hover, a:focus {
 i, span {
     display: inline-block;
 }
+/* ---------------------------------------------------
+    NAVBAR STYLE
+------------------------------------------------------*/
+.navbar-default {
+    float: left !important;
+}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
