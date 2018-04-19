@@ -20,5 +20,6 @@ from movieflix import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url('^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^s3/', views.s3, name='s3'),
 ]

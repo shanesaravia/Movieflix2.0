@@ -4,16 +4,20 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Movie(models.Model):
-    name = models.CharField(max_length=100)
-    actors = models.CharField(max_length=100)
-    popcorn_score = models.IntegerField()
-    tomato_score = models.IntegerField()
-    release_date = models.CharField(max_length=10)
-    runtime = models.CharField(max_length=20)
-    rating = models.CharField(max_length=10)
+    title = models.CharField(max_length=100)
+    actors = models.CharField(max_length=100, default=None, blank=True, null=True)
+    popcorn_score = models.IntegerField(default=None, blank=True, null=True)
+    tomato_score = models.IntegerField(default=None, blank=True, null=True)
+    release_date = models.CharField(max_length=10, default=None, blank=True, null=True)
+    runtime = models.CharField(max_length=20, default=None, blank=True, null=True)
+    rating = models.CharField(max_length=10, default=None, blank=True, null=True)
+    poster = models.CharField(max_length=100, default=None, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.title
+
+    def add(self):
+        pass
     # favorite = models.ForeignKey(User, related_name='favorites',
     #                              on_delete=models.CASCADE)
 
