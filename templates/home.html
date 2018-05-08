@@ -1,4 +1,4 @@
-{% load static %}<!DOCTYPE html>
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -84,28 +84,28 @@
           </nav>
           {% block content %}
             <div class="flex-container">
-              {% for key,value in moviedata.iterrows %}
+              {% for movie in moviedata %}
                 <div class="movie-box">
-                  <a href="{{ value.mainTrailer }}">
+                  <a href="{{ movie.trailer }}">
                     <div class="poster-wrapper">
-                      <img class="poster" src="{{ value.poster }}">
+                      <img class="poster" src="{{ movie.poster }}">
                       <div class="caption">
-                        <p class="text">{{ value.synopsis }}</p>
+                        <p class="text">{{ movie.synopsis }}</p>
                       </div>
                     </div>
                   </a>
                   <div class="movie-data">
                     <div class="wrapper text-center">
-                      <span class="movie-title font-weight-bold text-danger">{{ value.title }}</span>
+                      <span class="movie-title font-weight-bold text-danger">{{ movie.title }}</span>
                       <hr class="my-2">
                     </div>
-                    <span class="data-head actors">Actors:</span> {{ value.actors }}
+                    <span class="data-head actors">Actors:</span> {{ movie.actors }}
                     <br>
-                    <img class="score" src="static/images/popcorn.png"> {{ value.popcornScore }}
-                    <img class="score" src="static/images/tomato.png"> {{ value.tomatoScore }}
-                    <br><span class="data-head releasedate">Release Date:</span> {{ value.theaterReleaseDate }}
-                    <br><span class="data-head runtime">Runtime:</span> {{ value.runtime }}
-                    <br><span class="data-head rating">Rating:</span> {{ value.mpaaRating }}
+                    <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
+                    <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+                    <br><span class="data-head releasedate">Release Date:</span> {{ movie.release_date }}
+                    <br><span class="data-head runtime">Runtime:</span> {{ movie.runtime }}
+                    <br><span class="data-head rating">Rating:</span> {{ movie.rating }}
                   </div>
                 </div>
               {% endfor %}

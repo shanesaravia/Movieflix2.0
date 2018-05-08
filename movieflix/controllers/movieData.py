@@ -2,24 +2,13 @@ import requests
 import pandas
 import re
 from pandas.io.json import json_normalize
-import yaml
-import os
-import boto3
-import base64
-import io
+from configs import Config
 from movieflix.models import Movie
 
-class Config(object):
 
-    def load():
-        with open('config.yml', 'r') as config:
-            return yaml.load(config)
-
-
-class RottonTomatoes(Config):
+class RottonTomatoes():
 
     def __init__(self):
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
         self.config = Config.load()
         urlRT = 'https://www.rottentomatoes.com/api/private/v2.0/browse\
         ?page=1\
@@ -39,9 +28,13 @@ class RottonTomatoes(Config):
     def prepare_data(self):
         self.df.drop(['synopsisType', 'popcornIcon', 'tomatoIcon',
                       'mainTrailer.id', 'id', 'posters.thumborId',
-                      'posters.primary', 'dvdReleaseDate', 'url',
-                      'synopsis'], axis=1, inplace=True)
-        self.df.rename(columns={'mainTrailer.sourceId': 'mainTrailer'},
+                      'posters.primary', 'dvdReleaseDate', 'url',], 
+                      axis=1, inplace=True)
+        self.df.rename(columns={'mainTrailer.sourceId': 'trailer',
+                                'popcornScore': 'popcorn_score',
+                                'tomatoScore': 'tomato_score',
+                                'theaterReleaseDate': 'release_date',
+                                'mpaaRating': 'rating'},
                        inplace=True)
         self.df['title'] = self.df['title'].apply(
             lambda x: re.sub(r' \(.+\)', '', x))
@@ -52,7 +45,7 @@ class RottonTomatoes(Config):
 
     def get_data(self, title):
         title = title.replace(' ', '+').replace('#', '')
-        api = 'https://api.themoviedb.org/3/search/movie'
+        api = 'https://api.themoviedb.org/3/search/movie' 
         searchUrl = '{}?api_key={}&query={}'.format(
             api, self.config['apikey'], title)
         resp = requests.get(searchUrl).json()
@@ -71,42 +64,26 @@ class RottonTomatoes(Config):
             overview = "Not Available"
         return posterUrl, overview
 
-    def saveToDb(self):
-        m = Movie(title='test')
-        m.save()
+    def update(self):
+        for index, row in self.df.iterrows():
+            try:
+                movie = row.to_dict()
+                self.saveMovie(movie)
+            except Exception as e:
+                print(e)
+                continue
+        return True
 
+    def saveMovie(self, movieData):
+        obj = Movie()
+        for data in movieData:
+            setattr(obj, data, movieData[data])
+        obj.save()
 
-class S3(Config):
-
-    def __init__(self):
-        pass
-
-    def test(self):
-        # Get image
-        image = 'http://image.tmdb.org/t/p/w300/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg'
-        res = requests.get(image, stream=True)
-
-        # Create bucket
-        s3 = boto3.resource('s3')
-        bucket = s3.create_bucket(Bucket='movieflix-s3')
-
-        # Upload image
-        bucket.put_object(Key='test-image', Body=res.content)
-
-        # Download image
-
-        obj = s3.Object('movieflix-test', 'test-image')
-        obj = obj.get()['Body'].read()
-
-        image = io.BytesIO(obj)
-        image = base64.b64encode(image.getvalue())
-
-        return image
-        # return s3.buckets.all()
 
 def main():
     movies = RottonTomatoes()
-    movies.saveToDb()
+    # movies.saveDb('movie')
 
 if __name__ == '__main__':
     main()
