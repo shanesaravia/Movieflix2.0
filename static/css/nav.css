@@ -30,6 +30,11 @@ a, a:hover, a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    width:100%;
+}
+
+.navbar-header {
+    width: 100%;
 }
 
 .navbar-btn {
@@ -45,7 +50,7 @@ i, span {
     NAVBAR STYLE
 ------------------------------------------------------*/
 .navbar-default {
-    float: left !important;
+
 }
 
 /* ---------------------------------------------------

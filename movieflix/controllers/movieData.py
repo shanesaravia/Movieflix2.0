@@ -2,21 +2,14 @@ import requests
 import pandas
 import re
 from pandas.io.json import json_normalize
-import yaml
-import os
+from configs import Config
+from movieflix.models import Movie
+from django.urls import reverse
 
 
-class Config(object):
-
-    def load():
-        with open('config.yml', 'r') as config:
-            return yaml.load(config)
-
-
-class RottonTomatoes(object):
+class RottonTomatoes():
 
     def __init__(self):
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
         self.config = Config.load()
         urlRT = 'https://www.rottentomatoes.com/api/private/v2.0/browse\
         ?page=1\
@@ -36,20 +29,27 @@ class RottonTomatoes(object):
     def prepare_data(self):
         self.df.drop(['synopsisType', 'popcornIcon', 'tomatoIcon',
                       'mainTrailer.id', 'id', 'posters.thumborId',
-                      'posters.primary', 'dvdReleaseDate', 'url',
-                      'synopsis'], axis=1, inplace=True)
-        self.df.rename(columns={'mainTrailer.sourceId': 'mainTrailer'},
+                      'posters.primary', 'dvdReleaseDate', 'url',], 
+                      axis=1, inplace=True)
+        self.df.rename(columns={'mainTrailer.sourceId': 'trailer',
+                                'popcornScore': 'popcorn_score',
+                                'tomatoScore': 'tomato_score',
+                                'theaterReleaseDate': 'release_date',
+                                'mpaaRating': 'rating'},
                        inplace=True)
         self.df['title'] = self.df['title'].apply(
             lambda x: re.sub(r' \(.+\)', '', x))
         self.df['actors'] = self.df['actors'].apply(lambda x: ', '.join(x))
         self.df['poster'], self.df['synopsis'] = zip(
             *self.df['title'].apply(self.get_data))
+        # Set NaNs
+        self.df['runtime'] = self.df['runtime'].fillna('N/A')
+        self.df['trailer'] = self.df['trailer'].fillna('')
         return self.df
 
     def get_data(self, title):
         title = title.replace(' ', '+').replace('#', '')
-        api = 'https://api.themoviedb.org/3/search/movie'
+        api = 'https://api.themoviedb.org/3/search/movie' 
         searchUrl = '{}?api_key={}&query={}'.format(
             api, self.config['apikey'], title)
         resp = requests.get(searchUrl).json()
@@ -68,21 +68,27 @@ class RottonTomatoes(object):
             overview = "Not Available"
         return posterUrl, overview
 
-    # def get_html(self, start=True):
-    #     env = Environment(loader=FileSystemLoader('./templates'))
-    #     template = env.get_template("indextemp.html")
-    #     template_vars = {'moviedata': self.df}
-    #     html_out = template.render(template_vars)
-    #     with open('./templates/index.html', 'w') as f:
-    #         f.write(html_out)
-    #     if start == True:
-    #         os.chdir('./templates')
-    #         os.startfile('index.html')
+    def update(self):
+        for index, row in self.df.iterrows():
+            try:
+                movie = row.to_dict()
+                self.saveMovie(movie)
+            except Exception as e:
+                print(e)
+                continue
+        return True
 
-# def main():
-#     movies = RottonTomatoes()
-#     movies.get_html()
+    def saveMovie(self, movieData):
+        obj = Movie()
+        for data in movieData:
+            setattr(obj, data, movieData[data])
+        obj.save()
 
 
-# if __name__ == '__main__':
-#     main()
+def main():
+    movies = RottonTomatoes()
+    movies.prepare_data()
+    # movies.saveDb('movie')
+
+if __name__ == '__main__':
+    main()

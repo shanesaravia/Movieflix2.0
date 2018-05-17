@@ -1,128 +1,58 @@
-{% load static %}<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% block title %}Movieflix - Fresh Movies{% endblock %}
+{% block css %}
+{% endblock %}
 
-        <title>Movie Recommendations</title>
-
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
-        <link rel="stylesheet" href="{% static 'css/nav.css' %}">
-    </head>
-  <body>
-    <header>
-    </header>
-    <content>
-      <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-          <div class="sidebar-header">
-            <h3>MovieFlix</h3>
-            <strong>MF</strong>
+{% block content %}
+  <section class="movie-grid">
+    {% for movie in moviedata %}
+      <div class="movie-box">
+        <a href="{{ movie.trailer }}">
+          <div class="poster-wrapper">
+            <img class="poster" src="{{ movie.poster }}">
+            <div class="caption">
+              <p class="text">{{ movie.synopsis }}</p>
+            </div>
           </div>
-
-          <ul class="list-unstyled components">
-            <li class="active">
-              <a href="#">
-                <i class="glyphicon glyphicon-home"></i>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-briefcase"></i>
-                About
-              </a>
-              <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false">
-                <i class="glyphicon glyphicon-duplicate"></i>
-                Categories
-              </a>
-              <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                <li><a href="#">New in Theatres</a></li>
-                  <li><a href="#">New DVD Releases</a></li>
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Horror</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-paperclip"></i>
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-send"></i>
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <!-- Page Content Holder -->
-        <div id="content">
-          <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" id="sidebarCollapse" class="btn btn-danger navbar-btn">
-                  <i class="glyphicon glyphicon-align-left"></i>
-                  <span>Sidebar</span>
-                </button>
-                <input id="search" type="text" name="search" placeholder="Search">
-              </div>
-
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                </ul>
-              </div>
-            </div>
-          </nav>
-          {% block content %}
-            <div class="flex-container">
-              {% for key,value in moviedata.iterrows %}
-                <div class="movie-box">
-                  <a href="{{ value.mainTrailer }}">
-                    <div class="poster-wrapper">
-                      <img class="poster" src="{{ value.poster }}">
-                      <div class="caption">
-                        <p class="text">{{ value.synopsis }}</p>
-                      </div>
-                    </div>
-                  </a>
-                  <div class="movie-data">
-                    <div class="wrapper text-center">
-                      <span class="movie-title font-weight-bold text-danger">{{ value.title }}</span>
-                      <hr class="my-2">
-                    </div>
-                    <span class="data-head actors">Actors:</span> {{ value.actors }}
-                    <br>
-                    <img class="score" src="static/images/popcorn.png"> {{ value.popcornScore }}
-                    <img class="score" src="static/images/tomato.png"> {{ value.tomatoScore }}
-                    <br><span class="data-head releasedate">Release Date:</span> {{ value.theaterReleaseDate }}
-                    <br><span class="data-head runtime">Runtime:</span> {{ value.runtime }}
-                    <br><span class="data-head rating">Rating:</span> {{ value.mpaaRating }}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          {% endblock %}
+        </a>
+        <div class="movie-data">
+          <span class="movie-title">{{ movie.title }}</span>
+          <br>
+          <hr class="my-1">
+          <span class="data-head actors">Actors:</span> {{ movie.actors }}
+          <br>
+          <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
+          <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+          <br><span class="data-head releasedate">Release Date:</span> {{ movie.release_date }}
+          <br><span class="data-head runtime">Runtime:</span> {{ movie.runtime }}
+          <br><span class="data-head rating">Rating:</span> {{ movie.rating }}
         </div>
       </div>
-    </content>
-    <footer>
-    </footer>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap Js CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Bootstrap 4 Js -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Custom Js -->
-    <script src="{% static 'js/nav.js' %}"></script>
-  </body>
-</html>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+<!--       <div class="movie-box">
+        <a href="{{ movie.trailer }}">
+          <div class="poster-wrapper">
+            <img class="poster" src="{{ movie.poster }}">
+            <div class="caption">
+              <p class="text">{{ movie.synopsis }}</p>
+            </div>
+          </div>
+        </a>
+        <div class="movie-data">
+          <div class="wrapper text-center">
+            <span class="movie-title font-weight-bold text-danger">{{ movie.title }}</span>
+            <hr class="my-2">
+          </div>
+          <span class="data-head actors">Actors:</span> {{ movie.actors }}
+          <br>
+          <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
+          <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+          <br><span class="data-head releasedate">Release Date:</span> {{ movie.release_date }}
+          <br><span class="data-head runtime">Runtime:</span> {{ movie.runtime }}
+          <br><span class="data-head rating">Rating:</span> {{ movie.rating }}
+        </div> -->
