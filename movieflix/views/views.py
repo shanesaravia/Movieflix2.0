@@ -1,10 +1,5 @@
 from django.shortcuts import render
-# from .models import Movie
 
-# import requests
-# from .movieApp import RottonTomatoes
-
-#import test
 # from .movieData import S3
 from ..controllers.movieData import RottonTomatoes
 from ..controllers.movieApp import Movieflix
@@ -13,14 +8,6 @@ from ..controllers.movieApp import Movieflix
 def home(request):
     movies = Movieflix.retrieve_data()
     return render(request, 'home.html', {'moviedata': movies})
-
-# Create your views here.
-# def home(request):
-#     movies = RottonTomatoes()
-#     movies = movies.prepare_data()
-#     return render(request, 'home.html', {'moviedata': movies})
-    # movies = Movie.objects.all()
-    # return render(request, 'home.html', {'movies': movies})
 
 def updateDb(request):
 	rt = RottonTomatoes()

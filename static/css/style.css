@@ -1,28 +1,35 @@
-.navbar-brand {
-	font-family: 'Josefin Sans', sans-serif;
-	font-size: 175%;
-	padding: 0;
+/* CSS Variables */
+:root {
+	--primary: #ddd;
+	--dark: #333;
+	--light: #fff;
+	--shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+	--head-red: #d9534f;
+}
+
+#content {
+	width: 100%;
+}
+
+.movie-grid {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 img.poster {
-	width: 300px;
-	height: 450px;
+	max-width: 300px;
+	max-height: 450px;
 }
 
-/* Testing Synopsis On Hover */
-.flex-container {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	align-content: center;
-	width: 1670px;
-	margin: 0 auto;
-
+.poster-wrapper {
+	max-width: 300px;
 }
 
 .movie-box {
 	position: relative;
 	margin: 0 3.5% 1% 3.5%;
+	max-width: 300px;
 }
 
 .caption {
@@ -50,6 +57,13 @@ img.poster {
 	filter:brightness(25%);
 }
 
+span.movie-title {
+	font-weight: bold;
+	color: var(--head-red);
+	width: 100%;
+	text-align: center;
+}
+
 .movie-data {
 	max-width: 300px;
 	padding: 10px;
@@ -65,26 +79,9 @@ span.data-head {
 
 /* Responsive Layout */
 /* 4 columns */
-@media only screen and (max-width: 1640px) {
-	.flex-container {
-		width: 1305px;
-	}
-}
+
 /* 3 columns */
-@media only screen and (max-width: 1305px) {
-	.flex-container {
-		width: 970px;
-	}
-}
+
 /* 2 columns */
-@media only screen and (max-width: 970px) {
-	.flex-container {
-		width: 635px;
-	}
-}
+
 /* 1 column */
-@media only screen and (max-width: 635px) {
-	.flex-container {
-		width: 300px;
-	}
-}

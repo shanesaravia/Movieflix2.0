@@ -4,6 +4,7 @@ import re
 from pandas.io.json import json_normalize
 from configs import Config
 from movieflix.models import Movie
+from django.urls import reverse
 
 
 class RottonTomatoes():
@@ -41,6 +42,9 @@ class RottonTomatoes():
         self.df['actors'] = self.df['actors'].apply(lambda x: ', '.join(x))
         self.df['poster'], self.df['synopsis'] = zip(
             *self.df['title'].apply(self.get_data))
+        # Set NaNs
+        self.df['runtime'] = self.df['runtime'].fillna('N/A')
+        self.df['trailer'] = self.df['trailer'].fillna('')
         return self.df
 
     def get_data(self, title):
@@ -83,6 +87,7 @@ class RottonTomatoes():
 
 def main():
     movies = RottonTomatoes()
+    movies.prepare_data()
     # movies.saveDb('movie')
 
 if __name__ == '__main__':
