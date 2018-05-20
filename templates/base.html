@@ -7,7 +7,9 @@
       <!-- Metatags -->
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
       <!-- CSS Bootstrap 4 -->
       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <!-- CSS Bootstrap 3 -->
@@ -30,46 +32,29 @@
         <!-- Sidebar Holder -->
         {% block sidebar %}
         <nav id="sidebar">
-          <div class="sidebar-header">
-            <h3>MovieFlix</h3>
-            <strong>MF</strong>
+          <div id="sidebar-container">
+            <div class="sidebar-header">
+              <h3>Movie<span>F</span>lix</h3>
+              <strong>MF</strong>
+            </div>
+            <ul class="list-unstyled components">
+              <li class="active">
+                <a href="{% url 'home' %}">
+                  <i class="glyphicon glyphicon-home"></i>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false">
+                  <i class="glyphicon glyphicon-list-alt"></i>
+                  Categories
+                </a>
+                <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                  <li><a href="{% url 'home' %}">Certified Fresh</a></li>
+                </ul>
+              </li>
+            </ul>
           </div>
-          <ul class="list-unstyled components">
-            <li class="active">
-              <a href="#">
-                <i class="glyphicon glyphicon-home"></i>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-briefcase"></i>
-                About
-              </a>
-              <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false">
-                <i class="glyphicon glyphicon-duplicate"></i>
-                Categories
-              </a>
-              <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                <li><a href="#">New in Theatres</a></li>
-                  <li><a href="#">New DVD Releases</a></li>
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Horror</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-paperclip"></i>
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-send"></i>
-                Contact
-              </a>
-            </li>
-          </ul>
         </nav>
         {% endblock %}
         <!-- Page Content Holder -->
@@ -80,7 +65,7 @@
               <div class="navbar-header">
                 <button type="button" id="sidebarCollapse" class="btn btn-danger navbar-btn">
                   <i class="glyphicon glyphicon-align-left"></i>
-                  <span>Sidebar</span>
+                  <span>Menu</span>
                 </button>
                 <input id="search" type="text" name="search" placeholder="Search">
               </div>
@@ -110,6 +95,8 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- Sidebar Js -->
     <script src="{% static 'js/nav.js' %}"></script>
+    <!-- Custom Js -->
+    <script src="{% static 'js/script.js' %}"></script>
     {% block js %}{% endblock %}
     {% endblock %}
   </body>

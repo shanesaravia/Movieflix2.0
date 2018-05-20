@@ -14,10 +14,10 @@ class Movieflix():
     @classmethod
     def retrieve_data(cls):
         try:
-            movies = Movie.objects.all()[:29]
+            movies = Movie.objects.all().order_by('-id')[:30]
             if not movies:
                 views.updateDb(None)
-                movies = Movie.objects.all()[:29]
+                movies = Movie.objects.all().order_by('-id')[:30]
         except Exception as e:
             print(e)
         return movies

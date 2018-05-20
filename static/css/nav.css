@@ -3,6 +3,13 @@
 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+/* CSS Variables */
+:root {
+    --sidebar-width: 250px;
+    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+    --att-red: #d9534f;
+    --main-red: #E73B35;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -35,6 +42,7 @@ a, a:hover, a:focus {
 
 .navbar-header {
     width: 100%;
+    white-space: nowrap;
 }
 
 .navbar-btn {
@@ -62,8 +70,8 @@ i, span {
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: var(--sidebar-width);
+    max-width: var(--sidebar-width);
     background: #282828;
     color: #fff;
     transition: all 0.3s;
@@ -73,6 +81,21 @@ i, span {
     min-width: 80px;
     max-width: 80px;
     text-align: center;
+}
+
+/* Sidebar header */
+.sidebar-header h3 {
+    color: var(--main-red);
+}
+
+/* First letter of sidebar header */
+.sidebar-header h3::first-letter {
+    color: white;
+}
+
+/* 6th letter of sidebar header */
+.sidebar-header h3 span {
+    color: white;
 }
 
 #sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
@@ -204,11 +227,13 @@ a.article, a.article:hover {
 }
 
 #search {
+    box-sizing:border-box;
 	border: none;
 	border-bottom: 1px solid #CCC;
-	margin: 0 40px;
-	width: 500px;
+	margin-left: 5%;
+	width: 50%;
 	background-color: white;
+    overflow: hidden;
 }
 
 #search:focus {
@@ -275,6 +300,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
         margin-left: 0;
     }
     #sidebarCollapse span {
+        display: none;
+    }
+}
+
+@media (max-width: 220px) {
+    #search {
         display: none;
     }
 }
