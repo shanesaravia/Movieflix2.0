@@ -1,5 +1,3 @@
-console.log('tessting');
-
 // When the user clicks on the button, scroll to the top of the document
 let backToTop = document.getElementById("scroll-up");
 let image = backToTop.getElementsByTagName("img")[0];
