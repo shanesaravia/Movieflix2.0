@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 
-from movieflix import views
+from movieflix.views import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url('^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^updateDb/', views.updateDb, name='updateDb'),
+    # url(r'^s3/', views.s3, name='s3'),
 ]

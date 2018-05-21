@@ -9,6 +9,7 @@ __pycache__/
 # Custom Ignores
 config.yml
 configs.yml
+*.todo
 
 # Distribution / packaging
 .Python
@@ -103,3 +104,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
+!.elasticbeanstalk/*.global.yml
+

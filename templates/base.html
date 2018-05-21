@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+      {% block head %}
+      <!-- Metatags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+      <!-- CSS Bootstrap 4 -->
+      <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+      <!-- CSS Bootstrap 3 -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!-- CSS for sidebar -->
+      <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      {% block css %}{% endblock %}
+      <title>{% block title %}Movieflix{% endblock %}</title>
+      {% endblock %}
+  </head>
+  <body>
+    <header>
+      {% block header %}
+      {% endblock %}
+    </header>
+    <content>
+      <div class="wrapper">
+        <!-- Sidebar Holder -->
+        {% block sidebar %}
+        <nav id="sidebar">
+          <div id="sidebar-container">
+            <div class="sidebar-header">
+              <h3>Movie<span>F</span>lix</h3>
+              <strong>MF</strong>
+            </div>
+            <ul class="list-unstyled components">
+              <li class="active">
+                <a href="{% url 'home' %}">
+                  <i class="glyphicon glyphicon-home"></i>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false">
+                  <i class="glyphicon glyphicon-list-alt"></i>
+                  Categories
+                </a>
+                <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                  <li><a href="{% url 'home' %}">Certified Fresh</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        {% endblock %}
+        <!-- Page Content Holder -->
+        {% block searchbar %}
+        <div id="content">
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" id="sidebarCollapse" class="btn btn-danger navbar-btn">
+                  <i class="glyphicon glyphicon-align-left"></i>
+                  <span>Menu</span>
+                </button>
+                <input id="search" type="text" name="search" placeholder="Search">
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                </ul>
+              </div>
+            </div>
+          </nav>
+          {% endblock %}
+          {% block content %}
+          <h3>Movies Unavailable</h3>
+          {% endblock %}
+        </div>
+      </div>
+    </content>
+    <footer>
+      {% block footer %}
+      {% endblock %}
+    </footer>
+    {% block loadjs %}
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap 3 Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 4 Js -->
+    <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+    <!-- Sidebar Js -->
+    <script src="{% static 'js/nav.js' %}"></script>
+    <!-- Custom Js -->
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block js %}{% endblock %}
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,106 @@
+/* CSS Variables */
+:root {
+	--primary: #ddd;
+	--dark: #333;
+	--light: #fff;
+	--shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+	--att-red: #d9534f;
+}
+
+#content {
+	width: 100%;
+}
+
+.movie-grid {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	justify-items: center;
+}
+
+img.poster {
+	max-width: 300px;
+	max-height: 450px;
+}
+
+.poster-wrapper {
+	max-width: 300px;
+}
+
+.movie-box {
+	position: relative;
+	margin: 0 3.5% 1% 3.5%;
+	max-width: 300px;
+}
+
+.caption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 280px;
+	margin: 10px;
+	visibility: hidden;
+	overflow: hidden;
+}
+
+.text {
+	color: white;
+	text-align: center;
+}
+
+.larger {
+	font-size: 25px !important;
+}
+
+.poster-wrapper:hover .caption {
+	transition: .5s ease;
+	visibility: visible;
+}
+
+.poster-wrapper:hover img.poster{
+	-webkit-filter: brightness(25%);
+	filter:brightness(25%);
+}
+
+span.movie-title {
+	font-weight: bold;
+	color: var(--att-red);
+	width: 100%;
+	text-align: center;
+}
+
+.movie-data {
+	max-width: 300px;
+	padding: 10px;
+}
+
+span.data-head {
+	font-weight: bold !important;
+}
+
+/* Movie grid back to top button */
+
+#scroll-up img {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	width: 55px;
+	height: 55px;
+	z-index: 99;
+	cursor: pointer;
+}
+
+#scroll-up img:hover {
+	-webkit-filter: brightness(70%);
+	filter:brightness(70%);
+}
+
+/* Responsive Layout */
+/* 4 columns */
+
+/* 3 columns */
+
+/* 2 columns */
+
+/* 1 column */
