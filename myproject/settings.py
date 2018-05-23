@@ -82,25 +82,23 @@ if 'RDS_HOSTNAME' in os.environ:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ['DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT']
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
+            'PORT': os.environ['DB_PORT']
         }
     }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'default-character-set': 'utf8',
-#         'HOST': os.getenv('DB_HOST'),
-#         'PORT': os.getenv('DB_PORT')
-#     }
-# }
-
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': os.environ['DB_NAME'],
+    #         'USER': os.environ['RDS_USERNAME'],
+    #         'PASSWORD': os.environ['RDS_PASSWORD'],
+    #         'HOST': os.environ['RDS_HOSTNAME'],
+    #         'PORT': os.environ['RDS_PORT']
+    #     }
+    # }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
