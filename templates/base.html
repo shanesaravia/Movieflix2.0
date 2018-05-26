@@ -11,7 +11,7 @@
       <!-- Favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
       <!-- CSS Bootstrap 4 -->
-      <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <!-- CSS Bootstrap 3 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <!-- CSS for sidebar -->
@@ -67,7 +67,9 @@
                   <i class="glyphicon glyphicon-align-left"></i>
                   <span>Menu</span>
                 </button>
-                <input id="search" type="text" name="search" placeholder="Search">
+                <form id="search-form" method="GET" action="{% url 'search' %}">
+                  <input id="search" type="text" name="q" value="" placeholder="Search">
+                </form>
               </div>
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
@@ -87,12 +89,14 @@
       {% endblock %}
     </footer>
     {% block loadjs %}
+    <!-- Popper Js (Required for Bootstrap)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap 3 Js CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Bootstrap 4 Js -->
-    <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- Sidebar Js -->
     <script src="{% static 'js/nav.js' %}"></script>
     <!-- Custom Js -->

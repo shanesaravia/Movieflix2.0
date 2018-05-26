@@ -6,8 +6,7 @@
 /* CSS Variables */
 :root {
     --sidebar-width: 250px;
-    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
-    --att-red: #d9534f;
+    --shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     --main-red: #DF2415;
 }
 
@@ -49,6 +48,7 @@ a, a:hover, a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+    background-color: var(--main-red);
 }
 
 i, span {
@@ -75,6 +75,7 @@ i, span {
     background: #282828;
     color: #fff;
     transition: all 0.3s;
+    box-shadow: var(--shadow)
 }
 
 #sidebar.active {
@@ -149,7 +150,7 @@ i, span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid grey;
+    /*border-bottom: 1px solid grey;*/
 }
 
 #sidebar ul li a {
@@ -180,6 +181,7 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     display: block;
     position: absolute;
     right: 20px;
+    top: 15px;
     font-family: 'Glyphicons Halflings';
     font-size: 0.6em;
 }
@@ -227,12 +229,19 @@ a.article, a.article:hover {
     transition: all 0.3s;
 }
 
+#search-form {
+    display: inline-block;
+    width: 50%;
+    max-width: 500px;
+}
+
 #search {
     box-sizing:border-box;
 	border: none;
 	border-bottom: 1px solid #CCC;
 	margin-left: 5%;
-	width: 50%;
+	width: 100%;
+    max-width: 500px;
 	background-color: white;
     overflow: hidden;
 }

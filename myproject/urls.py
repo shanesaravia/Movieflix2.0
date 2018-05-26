@@ -21,6 +21,7 @@ from movieflix.views import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^updateDb/', views.updateDb, name='updateDb'),
+    url(r'^updateDb/$', views.updateDb, name='updateDb'),
+    url(r'^results/$', views.search, name='search'),
     # url(r'^s3/', views.s3, name='s3'),
 ]

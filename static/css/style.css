@@ -3,8 +3,8 @@
 	--primary: #ddd;
 	--dark: #333;
 	--light: #fff;
-	--shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
-	--att-red: #d9534f;
+	--shadow: 2px 0px 5px rgba(0, 0, 0, 0.4);
+    --main-red: #DF2415;
 }
 
 #content {
@@ -21,6 +21,9 @@
 img.poster {
 	max-width: 300px;
 	max-height: 450px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .poster-wrapper {
@@ -64,7 +67,7 @@ img.poster {
 
 span.movie-title {
 	font-weight: bold;
-	color: var(--att-red);
+	color: var(--main-red);
 	width: 100%;
 	text-align: center;
 }
@@ -94,6 +97,22 @@ span.data-head {
 #scroll-up img:hover {
 	-webkit-filter: brightness(70%);
 	filter:brightness(70%);
+}
+
+/* Pagination Section */
+#pagination {
+	text-align: center;
+}
+
+.pagination .active span,
+.pagination .active span:hover {
+	background-color: var(--main-red);
+	border-color: var(--main-red);
+}
+
+.pagination li a,
+.pagination li a:hover {
+	color: var(--main-red);
 }
 
 /* Responsive Layout */

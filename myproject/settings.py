@@ -19,13 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# SECRET_KEY = os.getenv('SECRET_KEY')
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.shanesaravia.com']
 
 
 # Application definition
@@ -88,17 +88,6 @@ if 'RDS_HOSTNAME' in os.environ:
             'PORT': os.environ['RDS_PORT']
         }
     }
-
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': os.environ['DB_NAME'],
-    #         'USER': os.environ['RDS_USERNAME'],
-    #         'PASSWORD': os.environ['RDS_PASSWORD'],
-    #         'HOST': os.environ['RDS_HOSTNAME'],
-    #         'PORT': os.environ['RDS_PORT']
-    #     }
-    # }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
