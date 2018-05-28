@@ -51,7 +51,7 @@ class RottonTomatoes():
         title = title.replace(' ', '+').replace('#', '')
         api = 'https://api.themoviedb.org/3/search/movie' 
         searchUrl = '{}?api_key={}&query={}'.format(
-            api, self.config['apikey'], title)
+            api, self.config['api_key'], title)
         resp = requests.get(searchUrl).json()
         try:
             poster = resp['results'][0]['poster_path']

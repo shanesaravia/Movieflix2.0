@@ -1,11 +1,5 @@
-{% extends "base.html" %}
 {% load static %}
-
-{% block title %}Movieflix - Fresh Movies{% endblock %}
-{% block css %}
-{% endblock %}
-
-{% block content %}
+{% if moviedata %}
   <section class="movie-grid">
     {% for movie in moviedata %}
       <div class="movie-box">
@@ -27,17 +21,18 @@
           <hr class="my-2">
           <span class="data-head actors">Actors:</span> {{ movie.actors }}
           <br>
-          <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
-          <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+          <img class="score" src="{% static 'images/popcorn.png' %}"> {{ movie.popcorn_score }}
+          <img class="score" src="{% static 'images/tomato.png' %}"> {{ movie.tomato_score }}
           <br><span class="data-head releasedate">Release Date:</span> {{ movie.release_date }}
           <br><span class="data-head runtime">Runtime:</span> {{ movie.runtime }}
           <br><span class="data-head rating">Rating:</span> {{ movie.rating }}
         </div>
       </div>
     {% endfor %}
+    <div id="scroll-up">
+      <img src="{% static 'images/scroll-up.png' %}">
+    </div>
   </section>
-  {% include 'pagination.html' %}
-  <div id="scroll-up">
-    <img src="static/images/scroll-up.png">
-  </div>
-{% endblock %}
+{% else %}
+<h3>No movies found.</h3>
+{% endif %}

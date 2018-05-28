@@ -18,3 +18,16 @@ function scrollFunction() {
         image.style.display = "none";
     }
 }
+
+// Reset search on browser "back button"
+window.onload = function() {
+	document.getElementById("search").value = '';
+}
+
+
+
+
+// $(window).bind("pageshow", function() {
+//   search = document.getElementById('search');
+
+// });
