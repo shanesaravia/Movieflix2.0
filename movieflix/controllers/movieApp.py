@@ -15,7 +15,6 @@ class Movieflix():
     @classmethod
     def retrieve_data(cls):
         qty = config['movie']['qty'] * config['movie']['pages']
-        print(qty)
         try:
             movies = Movie.objects.all().order_by('-id')[:qty]
             if not movies:

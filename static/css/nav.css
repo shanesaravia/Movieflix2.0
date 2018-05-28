@@ -138,6 +138,11 @@ i, span {
     transform: translateX(50%);
 }
 
+#categoriesSubmenu li a{
+    position: relative;
+    left: -10px;
+}
+
 #sidebar .sidebar-header {
     padding: 20px;
     background: #212121;
@@ -154,7 +159,7 @@ i, span {
 }
 
 #sidebar ul li a {
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     font-size: 1.1em;
     display: block;
 }
