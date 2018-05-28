@@ -115,6 +115,25 @@ span.data-head {
 	color: var(--main-red);
 }
 
+/* Search */
+.clear-filter {
+	margin: 0 0 20px 25px;
+}
+
+#clear-filter-btn:hover {
+	background-color: var(--main-red);
+	border-color: var(--main-red);
+	color: white;
+}
+
+#clear-filter-btn:focus {
+	color: white;
+}
+
+#clear-filter-btn span {
+	padding-left: 10px;
+}
+
 /* Responsive Layout */
 /* 4 columns */
 

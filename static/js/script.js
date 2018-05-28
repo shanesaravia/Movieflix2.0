@@ -23,11 +23,3 @@ function scrollFunction() {
 window.onload = function() {
 	document.getElementById("search").value = '';
 }
-
-
-
-
-// $(window).bind("pageshow", function() {
-//   search = document.getElementById('search');
-
-// });
