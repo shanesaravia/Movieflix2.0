@@ -7,6 +7,14 @@ from movieflix.models import Movie
 from django.urls import reverse
 
 
+class API():
+    pass
+
+
+class TMDB(API):
+    pass
+
+
 class RottonTomatoes():
 
     def __init__(self):
