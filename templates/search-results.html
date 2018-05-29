@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
+{% block css %}
+{% endblock %}
+
 {% block content %}
+	<div class="clear-filter">
+		<button id="clear-filter-btn" class="btn" type="button">{{ query }}
+			<span>x</span>
+		</button>
+	</div>
   {% include 'movie-grid.html' %}
   {% include 'pagination.html' %}
 {% endblock %}
