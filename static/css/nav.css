@@ -139,8 +139,11 @@ i, span {
 }
 
 #categoriesSubmenu li a{
-    position: relative;
-    left: -10px;
+    margin-left: -10px;
+}
+
+#sidebar.active #categoriesSubmenu li a {
+    margin-left: 0;
 }
 
 #sidebar .sidebar-header {
