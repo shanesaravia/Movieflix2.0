@@ -3,6 +3,6 @@ import yaml
 class Config(object):
 
     @staticmethod
-    def load():
-        with open('configs/config.yml', 'r') as config:
+    def load(config_file='config.yml'):
+        with open('configs/{}'.format(config_file), 'r') as config:
             return yaml.load(config)

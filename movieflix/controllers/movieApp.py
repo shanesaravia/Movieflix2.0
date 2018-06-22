@@ -28,5 +28,6 @@ class Movieflix():
 def main():
     Movieflix.retrieve_data()
 
+
 if __name__ == '__main__':
     main()

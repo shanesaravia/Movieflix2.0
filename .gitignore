@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Custom Ignores
+*.yml
 config.yml
 configs.yml
 *.todo

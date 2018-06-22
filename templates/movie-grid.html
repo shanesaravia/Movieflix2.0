@@ -5,7 +5,11 @@
       <div class="movie-box">
         <a href="{{ movie.trailer }}">
           <div class="poster-wrapper">
-            <img class="poster" src="{{ movie.poster }}">
+            {% if movie.poster %}
+              <img class="poster" src="{{ movie.poster }}">
+            {% else %}
+              <img class="poster" src="{% static 'images/error.png' %}">
+            {% endif %}
             <div class="caption">
               {% if movie.synopsis|length > 500 %}
                 <p class="text">{{ movie.synopsis|slice:':500' }}<span class="larger">...</span></p>
@@ -29,9 +33,6 @@
         </div>
       </div>
     {% endfor %}
-    <div id="scroll-up">
-      <img src="{% static 'images/scroll-up.png' %}">
-    </div>
   </section>
 {% else %}
 <h3>No movies found.</h3>

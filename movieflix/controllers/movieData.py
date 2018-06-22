@@ -6,6 +6,8 @@ from configs import Config
 from movieflix.models import Movie
 from django.urls import reverse
 
+# Load configs
+config = Config.load()
 
 class API():
     pass
@@ -15,30 +17,18 @@ class TMDB(API):
     pass
 
 
-class RottonTomatoes():
+class RT(API):
 
     def __init__(self):
-        self.config = Config.load()
-        urlRT = 'https://www.rottentomatoes.com/api/private/v2.0/browse\
-        ?page=1\
-        &limit=40\
-        &type=cf-dvd-streaming-all\
-        &minTomato=70'
-        # urlRT = 'https://www.rottentomatoes.com/api/private/v2.0/browse\
-        # ?page=1\
-        # &limit=40\
-        # &type=top-dvd-streaming\
-        # &minTomato=70\
-        # &genres=1;2;4;5;6;8;9;10;11;13;18;14\
-        # &sortBy=popularity'
-        data = requests.get(urlRT).json()['results']
+        url = config['fresh']['base']
+        data = requests.get(url).json()['results']
         self.df = json_normalize(data)
 
     def prepare_data(self):
         self.df.drop(['synopsisType', 'popcornIcon', 'tomatoIcon',
                       'mainTrailer.id', 'id', 'posters.thumborId',
                       'posters.primary', 'dvdReleaseDate', 'url',], 
-                      axis=1, inplace=True)
+                     axis=1, inplace=True)
         self.df.rename(columns={'mainTrailer.sourceId': 'trailer',
                                 'popcornScore': 'popcorn_score',
                                 'tomatoScore': 'tomato_score',
@@ -94,8 +84,8 @@ class RottonTomatoes():
 
 
 def main():
-    movies = RottonTomatoes()
-    movies.prepare_data()
+    movies = RT()
+    # movies.prepare_data()
     # movies.saveDb('movie')
 
 if __name__ == '__main__':

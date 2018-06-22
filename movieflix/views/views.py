@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
+from django.core.paginator import Paginator, EmptyPage, \
+                                  PageNotAnInteger, InvalidPage
 from django.db.models import Q
 
 # from .movieData import S3
-from ..controllers.movieData import RottonTomatoes
+# from ..controllers.movieData import RottonTomatoes
 from ..controllers.movieApp import Movieflix
+
+from ..controllers.api import RT
+from ..controllers.db import DB
+from ..controllers.utils import Pagination
 
 from movieflix.models import Movie
 
@@ -21,27 +26,33 @@ def home(request):
 
     try:
         movies = paginator.page(page)
+        page_range = Pagination.get_range(paginator, movies)
     except PageNotAnInteger:
         movies = paginator.page(1)
     except (InvalidPage, EmptyPage):
         movies = paginator.page(paginator.num_pages)
 
-    return render(request, 'home.html', {'moviedata': movies})
+    return render(request, 'home.html', {'moviedata': movies,
+                                         'page_range': page_range})
+
 
 def updateDb(request):
-    rt = RottonTomatoes()
-    rt.prepare_data()
-    rt.update()
+    print('updating')
+    df = RT.get_data()
+    df = RT.format_df(df)
+    DB.update(df)
     print('update complete')
     return render(request, 'updateDb.html')
 
+
 def search(request):
-    query=request.GET.get('q')
+    query = request.GET.get('q')
 
     if query:
-        results = Movie.objects.order_by('-id').filter(Q(title__icontains=query) |
-                                                       Q(actors__icontains=query) |
-                                                       Q(synopsis__icontains=query))
+        results = Movie.objects.order_by('-id').filter(
+            Q(title__icontains=query) |
+            Q(actors__icontains=query) |
+            Q(synopsis__icontains=query))
     else:
         results = None
 
@@ -50,6 +61,7 @@ def search(request):
 
     try:
         movies = paginator.page(page)
+        page_range = Pagination.get_range(paginator, movies)
     except PageNotAnInteger:
         movies = paginator.page(1)
     except (InvalidPage, EmptyPage):
@@ -58,6 +70,7 @@ def search(request):
         movies = None
 
     return render(request, 'search-results.html', {'moviedata': movies,
+                                                   'page_range': page_range,
                                                    'query': query})
 
 # def s3(request):

@@ -81,6 +81,11 @@
           {% block content %}
           <h3>Movies Unavailable</h3>
           {% endblock %}
+          {% block scroll %}
+            <div id="scroll-up">
+              <img src="{% static 'images/scroll-up.png' %}">
+            </div>
+          {% endblock %}
         </div>
       </div>
     </content>
@@ -101,6 +106,7 @@
     <script src="{% static 'js/nav.js' %}"></script>
     <!-- Custom Js -->
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/scroll.js' %}"></script>
     {% block js %}{% endblock %}
     {% endblock %}
   </body>
