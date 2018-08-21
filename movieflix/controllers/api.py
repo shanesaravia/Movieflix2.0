@@ -55,8 +55,10 @@ class TMDB(API):
         resp = requests.get(query)
         cls.api_cooldown(resp.headers)
         json_data = resp.json()
+        # If movie not found in TMDB database
+        if not json_data['results']:
+            return 0
         data = cls.search_newest_match(title, json_data)
-
         tmdb_id = data['id']
 
         return tmdb_id
@@ -142,6 +144,7 @@ class RT(API):
         """
         Returns a pandas dataframe
         """
+        print('\n\n starting RT GET DATA')
         url = rt_config['fresh']['base']
         data = requests.get(url).json()['results']
         df = json_normalize(data)
@@ -149,6 +152,7 @@ class RT(API):
 
     @classmethod
     def format_df(cls, df):
+        print('\n\n starting RT FORMAT DF')
         # Drop unwanted columns
         df.drop(rt_config['columns_to_drop'],
                 axis=1, inplace=True)
@@ -161,25 +165,28 @@ class RT(API):
                                           if x else np.NaN)
         # Get TMDB ID
         df['tmdb_id'] = df['title'].apply(TMDB.get_id)
+        # Remove movies that couldn't be found on TMDB
+        df = df.loc[df['tmdb_id'] != 0]
         # Get TMDB movie data
         df['poster'], df['synopsis'], df['release_date'], df['language'], \
             df['genres'], df['imdb_id'], df['runtime'] = zip(
             *df['tmdb_id'].apply(TMDB.get_data))
+        # df['genres'] = df['genres'].apply(lambda x: ', '.join(x)
+        #                                   if x else np.NaN)
         # Set NaNs
-        df.update(df[['actors', 'runtime', 'trailer']].fillna('N/A'))
-        # df['actors'] = df['actors'].fillna('N/A')
-        # df['runtime'] = df['runtime'].fillna('N/A')
-        # df['trailer'] = df['trailer'].fillna('')
+        df.update(df[['actors', 'runtime']].fillna('N/A'))
+        df['trailer'] = df['trailer'].fillna('')
         # Reorder columns
         df = df[rt_config['order_columns']]
+        print('\n\n finishing RT FORMAT DF')
         return df
 
 
 def main():
     df = RT.get_data()
     df = RT.format_df(df)
-    # print(df)
-    # RT.update(df)
+    RT.update(df)
+    print(df)
 
 
 if __name__ == '__main__':

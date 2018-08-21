@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, \
                                   PageNotAnInteger, InvalidPage
 from django.db.models import Q
@@ -27,6 +28,8 @@ def home(request):
     try:
         movies = paginator.page(page)
         page_range = Pagination.get_range(paginator, movies)
+        print('\n\n\n')
+        print(page_range)
     except PageNotAnInteger:
         movies = paginator.page(1)
     except (InvalidPage, EmptyPage):
@@ -72,6 +75,23 @@ def search(request):
     return render(request, 'search-results.html', {'moviedata': movies,
                                                    'page_range': page_range,
                                                    'query': query})
+
+
+def updateLikesDislikes(request):
+    title = request.GET.get('movie')
+    field = request.GET.get('field')
+    action = request.GET.get('action')
+
+    movie = Movie.objects.get(title=title)
+    attr = getattr(movie, field)
+
+    if action == 'add':
+        attr += 1
+    elif action == 'remove':
+        attr -= 1
+    setattr(movie, field, attr)
+    movie.save()
+    return HttpResponse('200')
 
 # def s3(request):
 #   rt = RottonTomatoes()

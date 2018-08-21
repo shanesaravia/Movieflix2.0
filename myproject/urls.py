@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^updateDb/$', views.updateDb, name='updateDb'),
     url(r'^results/$', views.search, name='search'),
+    url(r'^updateLikesDislikes$', views.updateLikesDislikes, name='updateLikesDislikes')
     # url(r'^s3/', views.s3, name='s3'),
 ]

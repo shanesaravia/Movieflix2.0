@@ -18,33 +18,8 @@
               {% endif %}
             </div>
             <div class="mini-bar">
-              <span class="mb-icon lang"><span>{{ movie.language }}</span></span>
-              <div class="likes-container">
-                <img class="mb-icon likes" src="{% static 'images/thumbs-up-icon.png' %}">
-                <img class="mb-icon likes-alt" src="{% static 'images/thumbs-up-icon-full.png' %}">
-                <div class="likes-num-container">
-                  {% if movie.likes > 999 %}
-                    <span class="likes-val">{{ movie.likes|stringformat:"s"|slice:":-3" }}k</span>
-                  {% else %}
-                    <span class="likes-val">{{ movie.likes }}</span>
-                  {% endif %}
-                </div>
-              </div>
-              <div class="dislikes-container">
-                <img class="mb-icon dislikes" src="{% static 'images/thumbs-down-icon.png' %}">
-                <img class="mb-icon dislikes-alt" src="{% static 'images/thumbs-down-icon-full.png' %}">
-                <div class="dislikes-num-container">
-                  {% if movie.dislikes > 999 %}
-                    <span>{{ movie.dislikes|stringformat:"s"|slice:":-3" }}k</span>
-                  {% else %}
-                    <span>{{ movie.dislikes }}</span>
-                  {% endif %}
-                </div>
-              </div>
-              <div class="favorites-container">
-                <img class="mb-icon favorite" src="{% static 'images/star-icon.png' %}">
-                <img class="mb-icon favorite-alt" src="{% static 'images/star-icon-full.png' %}">
-              </div>
+              <span>{{ movie.language }}</span>
+              <span><img class="star-icon" src="{% static 'images/star-icon.png' %}"></span> 
             </div>
           </div>
         </a>

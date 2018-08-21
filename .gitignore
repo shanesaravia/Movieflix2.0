@@ -12,6 +12,7 @@ config.yml
 configs.yml
 *.todo
 *.old
+migrations/
 
 # Distribution / packaging
 .Python
