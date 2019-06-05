@@ -35,12 +35,11 @@ class RottonTomatoes():
         self.df = json_normalize(data)
 
     def prepare_data(self):
-        self.df.drop(['synopsisType', 'popcornIcon', 'tomatoIcon',
+        self.df.drop(['synopsisType', 'tomatoIcon',
                       'mainTrailer.id', 'id', 'posters.thumborId',
-                      'posters.primary', 'dvdReleaseDate', 'url',], 
+                      'posters.primary', 'dvdReleaseDate', 'url',],
                       axis=1, inplace=True)
         self.df.rename(columns={'mainTrailer.sourceId': 'trailer',
-                                'popcornScore': 'popcorn_score',
                                 'tomatoScore': 'tomato_score',
                                 'theaterReleaseDate': 'release_date',
                                 'mpaaRating': 'rating'},
@@ -59,7 +58,7 @@ class RottonTomatoes():
         title = title.replace(' ', '+').replace('#', '')
         api = 'https://api.themoviedb.org/3/search/movie' 
         searchUrl = '{}?api_key={}&query={}'.format(
-            api, self.config['api_key'], title)
+            api, self.config['tmdb']['api_key'], title)
         resp = requests.get(searchUrl).json()
         try:
             poster = resp['results'][0]['poster_path']

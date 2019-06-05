@@ -27,8 +27,12 @@
           <hr class="my-2">
           <span class="data-head actors">Actors:</span> {{ movie.actors }}
           <br>
-          <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
-          <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+          {% if movie.popcorn_score %}
+	          <img class="score" src="static/images/popcorn.png"> {{ movie.popcorn_score }}
+	      {% endif %}
+	      {% if movie.tomato_score %}
+	          <img class="score" src="static/images/tomato.png"> {{ movie.tomato_score }}
+	      {% endif %}
           <br><span class="data-head releasedate">Release Date:</span> {{ movie.release_date }}
           <br><span class="data-head runtime">Runtime:</span> {{ movie.runtime }}
           <br><span class="data-head rating">Rating:</span> {{ movie.rating }}
